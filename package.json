@@ -38,7 +38,9 @@
       "git add"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "proposal-temporal": "^0.3.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
