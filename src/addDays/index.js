@@ -1,6 +1,7 @@
 import toInteger from '../_lib/toInteger/index.js'
 import toDate from '../toDate/index.js'
 import requiredArgs from '../_lib/requiredArgs/index.js'
+import toTemporalDateTime from '../_lib/toTemporalDateTime/index.js'
 
 /**
  * @name addDays
@@ -14,7 +15,7 @@ import requiredArgs from '../_lib/requiredArgs/index.js'
  *
  * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
- * @param {Date|Number} date - the date to be changed
+ * @param {Date|Temporal.DateTime|Number} date - the date to be changed
  * @param {Number} amount - the amount of days to be added. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
  * @returns {Date} the new date with the days added
  * @throws {TypeError} 2 arguments required
@@ -27,15 +28,29 @@ import requiredArgs from '../_lib/requiredArgs/index.js'
 export default function addDays(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments)
 
-  var date = toDate(dirtyDate)
+  let date
+  try {
+    date = toTemporalDateTime(dirtyDate)
+  } catch (e) {
+    if (e instanceof RangeError) {
+      return new Date(NaN)
+    }
+    throw e
+  }
   var amount = toInteger(dirtyAmount)
   if (isNaN(amount)) {
     return new Date(NaN)
   }
   if (!amount) {
     // If 0 days, no-op to avoid changing times in the hour before end of DST
-    return date
+    // (this could be removed if fully using Temporal, but is still required
+    // because we return a legacy Date)
+    return toDate(dirtyDate)
   }
-  date.setDate(date.getDate() + amount)
-  return date
+  if (amount < 0) {
+    date = date.minus({ days: -amount })
+  } else {
+    date = date.plus({ days: amount })
+  }
+  return toDate(date)
 }

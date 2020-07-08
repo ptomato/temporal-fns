@@ -80,7 +80,7 @@ type CurriedFn4<A, B, C, D, R> = <A>(
 declare module.exports: {
   add: CurriedFn2<Duration, Date | number, Date>,
   addBusinessDays: CurriedFn2<number, Date | number, Date>,
-  addDays: CurriedFn2<number, Date | number, Date>,
+  addDays: CurriedFn2<number, Date | Temporal.DateTime | number, Date>,
   addHours: CurriedFn2<number, Date | number, Date>,
   addISOWeekYears: CurriedFn2<number, Date | number, Date>,
   addMilliseconds: CurriedFn2<number, Date | number, Date>,

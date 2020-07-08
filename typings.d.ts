@@ -94,7 +94,10 @@ declare module 'date-fns' {
   function addBusinessDays(date: Date | number, amount: number): Date
   namespace addBusinessDays {}
 
-  function addDays(date: Date | number, amount: number): Date
+  function addDays(
+    date: Date | Temporal.DateTime | number,
+    amount: number
+  ): Date
   namespace addDays {}
 
   function addHours(date: Date | number, amount: number): Date
@@ -3960,7 +3963,7 @@ declare module 'date-fns/fp' {
   const addBusinessDays: CurriedFn2<number, Date | number, Date>
   namespace addBusinessDays {}
 
-  const addDays: CurriedFn2<number, Date | number, Date>
+  const addDays: CurriedFn2<number, Date | Temporal.DateTime | number, Date>
   namespace addDays {}
 
   const addHours: CurriedFn2<number, Date | number, Date>
@@ -7971,7 +7974,10 @@ declare module 'date-fns/esm' {
   function addBusinessDays(date: Date | number, amount: number): Date
   namespace addBusinessDays {}
 
-  function addDays(date: Date | number, amount: number): Date
+  function addDays(
+    date: Date | Temporal.DateTime | number,
+    amount: number
+  ): Date
   namespace addDays {}
 
   function addHours(date: Date | number, amount: number): Date
@@ -11837,7 +11843,7 @@ declare module 'date-fns/esm/fp' {
   const addBusinessDays: CurriedFn2<number, Date | number, Date>
   namespace addBusinessDays {}
 
-  const addDays: CurriedFn2<number, Date | number, Date>
+  const addDays: CurriedFn2<number, Date | Temporal.DateTime | number, Date>
   namespace addDays {}
 
   const addHours: CurriedFn2<number, Date | number, Date>
@@ -18590,7 +18596,7 @@ interface dateFns {
 
   addBusinessDays(date: Date | number, amount: number): Date
 
-  addDays(date: Date | number, amount: number): Date
+  addDays(date: Date | Temporal.DateTime | number, amount: number): Date
 
   addHours(date: Date | number, amount: number): Date
 
