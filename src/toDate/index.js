@@ -1,4 +1,5 @@
 import requiredArgs from '../_lib/requiredArgs/index.js'
+import {Temporal} from 'proposal-temporal/lib/index.mjs'
 
 /**
  * @name toDate
@@ -10,14 +11,17 @@ import requiredArgs from '../_lib/requiredArgs/index.js'
  *
  * If the argument is an instance of Date, the function returns its clone.
  *
- * If the argument is a number, it is treated as a timestamp.
+ * If the argument is a number or an instance of Temporal.Absolute, it is treated as a timestamp.
+ *
+ * If the argument is an instance of Temporal.DateTime, it is treated as if it were in the local
+ * time zone. This matches the behaviour of `new Date(y, m, d, ...)`.
  *
  * If the argument is none of the above, the function returns Invalid Date.
  *
- * **Note**: *all* Date arguments passed to any *date-fns* function is processed by `toDate`.
+ * **Note**: *all* Date arguments returned from any *date-fns* function are processed by `toDate`.
  *
- * @param {Date|Number} argument - the value to convert
- * @returns {Date} the parsed date in the local time zone
+ * @param {Temporal.Absolute|Temporal.DateTime|Date|Number} argument - the value to convert
+ * @returns {Date} the converted date
  * @throws {TypeError} 1 argument required
  *
  * @example
@@ -42,6 +46,10 @@ export default function toDate(argument) {
   ) {
     // Prevent the date to lose the milliseconds when passed to new Date() in IE10
     return new Date(argument.getTime())
+  } else if (argument instanceof Temporal.Absolute) {
+    return new Date(argument.getEpochMilliseconds())
+  } else if (argument instanceof Temporal.DateTime) {
+    return new Date(argument.toAbsolute(Temporal.now.timeZone()).getEpochMilliseconds())
   } else if (typeof argument === 'number' || argStr === '[object Number]') {
     return new Date(argument)
   } else {

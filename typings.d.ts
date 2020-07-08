@@ -1001,7 +1001,9 @@ declare module 'date-fns' {
   function subYears(date: Date | number, amount: number): Date
   namespace subYears {}
 
-  function toDate(argument: Date | number): Date
+  function toDate(
+    argument: Temporal.Absolute | Temporal.DateTime | Date | number
+  ): Date
   namespace toDate {}
 
   const maxTime: number
@@ -4859,7 +4861,10 @@ declare module 'date-fns/fp' {
   const subYears: CurriedFn2<number, Date | number, Date>
   namespace subYears {}
 
-  const toDate: CurriedFn1<Date | number, Date>
+  const toDate: CurriedFn1<
+    Temporal.Absolute | Temporal.DateTime | Date | number,
+    Date
+  >
   namespace toDate {}
 
   const maxTime: number
@@ -8873,7 +8878,9 @@ declare module 'date-fns/esm' {
   function subYears(date: Date | number, amount: number): Date
   namespace subYears {}
 
-  function toDate(argument: Date | number): Date
+  function toDate(
+    argument: Temporal.Absolute | Temporal.DateTime | Date | number
+  ): Date
   namespace toDate {}
 
   const maxTime: number
@@ -12731,7 +12738,10 @@ declare module 'date-fns/esm/fp' {
   const subYears: CurriedFn2<number, Date | number, Date>
   namespace subYears {}
 
-  const toDate: CurriedFn1<Date | number, Date>
+  const toDate: CurriedFn1<
+    Temporal.Absolute | Temporal.DateTime | Date | number,
+    Date
+  >
   namespace toDate {}
 
   const maxTime: number
@@ -19243,7 +19253,7 @@ interface dateFns {
 
   subYears(date: Date | number, amount: number): Date
 
-  toDate(argument: Date | number): Date
+  toDate(argument: Temporal.Absolute | Temporal.DateTime | Date | number): Date
 
   maxTime: number
 

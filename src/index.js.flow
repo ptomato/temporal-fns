@@ -742,7 +742,9 @@ declare module.exports: {
 
   subYears: (date: Date | number, amount: number) => Date,
 
-  toDate: (argument: Date | number) => Date,
+  toDate: (
+    argument: Temporal.Absolute | Temporal.DateTime | Date | number
+  ) => Date,
 
   maxTime: number,
 
