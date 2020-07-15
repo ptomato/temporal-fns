@@ -78,7 +78,11 @@ type CurriedFn4<A, B, C, D, R> = <A>(
         ) => CurriedFn1<D, R> | (<A, B, C, D>(a: A, b: B, c: C, d: D) => R)))
 
 declare module.exports: {
-  add: CurriedFn2<Duration, Date | number, Date>,
+  add: CurriedFn2<
+    Temporal.Duration | Duration,
+    Temporal.DateTime | Date | number,
+    Date
+  >,
   addBusinessDays: CurriedFn2<number, Date | number, Date>,
   addDays: CurriedFn2<number, Date | Temporal.DateTime | number, Date>,
   addHours: CurriedFn2<number, Date | number, Date>,

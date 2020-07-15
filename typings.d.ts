@@ -88,7 +88,10 @@ declare module 'date-fns' {
 // Regular Functions
 
 declare module 'date-fns' {
-  function add(date: Date | number, duration: Duration): Date
+  function add(
+    date: Temporal.DateTime | Date | number,
+    duration: Temporal.Duration | Duration
+  ): Date
   namespace add {}
 
   function addBusinessDays(date: Date | number, amount: number): Date
@@ -3960,7 +3963,11 @@ declare module 'date-fns/toDate/index.js' {
 // FP Functions
 
 declare module 'date-fns/fp' {
-  const add: CurriedFn2<Duration, Date | number, Date>
+  const add: CurriedFn2<
+    Temporal.Duration | Duration,
+    Temporal.DateTime | Date | number,
+    Date
+  >
   namespace add {}
 
   const addBusinessDays: CurriedFn2<number, Date | number, Date>
@@ -7971,7 +7978,10 @@ declare module 'date-fns/fp/toDate/index.js' {
 // ECMAScript Module Functions
 
 declare module 'date-fns/esm' {
-  function add(date: Date | number, duration: Duration): Date
+  function add(
+    date: Temporal.DateTime | Date | number,
+    duration: Temporal.Duration | Duration
+  ): Date
   namespace add {}
 
   function addBusinessDays(date: Date | number, amount: number): Date
@@ -11843,7 +11853,11 @@ declare module 'date-fns/esm/toDate/index.js' {
 // ECMAScript Module FP Functions
 
 declare module 'date-fns/esm/fp' {
-  const add: CurriedFn2<Duration, Date | number, Date>
+  const add: CurriedFn2<
+    Temporal.Duration | Duration,
+    Temporal.DateTime | Date | number,
+    Date
+  >
   namespace add {}
 
   const addBusinessDays: CurriedFn2<number, Date | number, Date>
@@ -18598,7 +18612,10 @@ declare module 'date-fns/esm/locale/zh-TW/index.js' {
 // dateFns Global Interface
 
 interface dateFns {
-  add(date: Date | number, duration: Duration): Date
+  add(
+    date: Temporal.DateTime | Date | number,
+    duration: Temporal.Duration | Duration
+  ): Date
 
   addBusinessDays(date: Date | number, amount: number): Date
 

@@ -48,7 +48,10 @@ export type Duration = {
 }
 
 declare module.exports: {
-  add: (date: Date | number, duration: Duration) => Date,
+  add: (
+    date: Temporal.DateTime | Date | number,
+    duration: Temporal.Duration | Duration
+  ) => Date,
 
   addBusinessDays: (date: Date | number, amount: number) => Date,
 
