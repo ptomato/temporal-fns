@@ -85,7 +85,7 @@ declare module.exports: {
   addISOWeekYears: CurriedFn2<number, Date | number, Date>,
   addMilliseconds: CurriedFn2<number, Date | number, Date>,
   addMinutes: CurriedFn2<number, Date | number, Date>,
-  addMonths: CurriedFn2<number, Date | number, Date>,
+  addMonths: CurriedFn2<number, Temporal.DateTime | Date | number, Date>,
   addQuarters: CurriedFn2<number, Date | number, Date>,
   addSeconds: CurriedFn2<number, Date | number, Date>,
   addWeeks: CurriedFn2<number, Date | number, Date>,

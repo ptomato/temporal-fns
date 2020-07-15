@@ -47,4 +47,7 @@ export type Duration = {
   seconds?: number
 }
 
-declare module.exports: (date: Date | number, amount: number) => Date
+declare module.exports: (
+  date: Temporal.DateTime | Date | number,
+  amount: number
+) => Date

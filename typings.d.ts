@@ -112,7 +112,10 @@ declare module 'date-fns' {
   function addMinutes(date: Date | number, amount: number): Date
   namespace addMinutes {}
 
-  function addMonths(date: Date | number, amount: number): Date
+  function addMonths(
+    date: Temporal.DateTime | Date | number,
+    amount: number
+  ): Date
   namespace addMonths {}
 
   function addQuarters(date: Date | number, amount: number): Date
@@ -3978,7 +3981,7 @@ declare module 'date-fns/fp' {
   const addMinutes: CurriedFn2<number, Date | number, Date>
   namespace addMinutes {}
 
-  const addMonths: CurriedFn2<number, Date | number, Date>
+  const addMonths: CurriedFn2<number, Temporal.DateTime | Date | number, Date>
   namespace addMonths {}
 
   const addQuarters: CurriedFn2<number, Date | number, Date>
@@ -7992,7 +7995,10 @@ declare module 'date-fns/esm' {
   function addMinutes(date: Date | number, amount: number): Date
   namespace addMinutes {}
 
-  function addMonths(date: Date | number, amount: number): Date
+  function addMonths(
+    date: Temporal.DateTime | Date | number,
+    amount: number
+  ): Date
   namespace addMonths {}
 
   function addQuarters(date: Date | number, amount: number): Date
@@ -11858,7 +11864,7 @@ declare module 'date-fns/esm/fp' {
   const addMinutes: CurriedFn2<number, Date | number, Date>
   namespace addMinutes {}
 
-  const addMonths: CurriedFn2<number, Date | number, Date>
+  const addMonths: CurriedFn2<number, Temporal.DateTime | Date | number, Date>
   namespace addMonths {}
 
   const addQuarters: CurriedFn2<number, Date | number, Date>
@@ -18606,7 +18612,7 @@ interface dateFns {
 
   addMinutes(date: Date | number, amount: number): Date
 
-  addMonths(date: Date | number, amount: number): Date
+  addMonths(date: Temporal.DateTime | Date | number, amount: number): Date
 
   addQuarters(date: Date | number, amount: number): Date
 

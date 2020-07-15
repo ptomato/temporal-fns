@@ -62,7 +62,7 @@ declare module.exports: {
 
   addMinutes: (date: Date | number, amount: number) => Date,
 
-  addMonths: (date: Date | number, amount: number) => Date,
+  addMonths: (date: Temporal.DateTime | Date | number, amount: number) => Date,
 
   addQuarters: (date: Date | number, amount: number) => Date,
 
