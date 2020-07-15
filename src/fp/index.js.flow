@@ -395,7 +395,10 @@ declare module.exports: {
   isTuesday: CurriedFn1<Date | number, boolean>,
   isValid: CurriedFn1<any, boolean>,
   isWednesday: CurriedFn1<Date | number, boolean>,
-  isWeekend: CurriedFn1<Date | number, boolean>,
+  isWeekend: CurriedFn1<
+    Temporal.DateTime | Temporal.Date | Date | number,
+    boolean
+  >,
   isWithinInterval: CurriedFn2<Interval, Date | number, boolean>,
   lastDayOfDecade: CurriedFn1<Date | number, Date>,
   lastDayOfISOWeek: CurriedFn1<Date | number, Date>,

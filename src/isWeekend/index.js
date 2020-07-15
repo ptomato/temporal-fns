@@ -1,5 +1,5 @@
-import toDate from '../toDate/index.js'
 import requiredArgs from '../_lib/requiredArgs/index.js'
+import toTemporalDate from '../_lib/toTemporalDate/index.js'
 
 /**
  * @name isWeekend
@@ -13,19 +13,25 @@ import requiredArgs from '../_lib/requiredArgs/index.js'
  *
  * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
- * @param {Date|Number} date - the date to check
+ * @param {Temporal.DateTime|Temporal.Date|Date|Number} date - the date to check
  * @returns {Boolean} the date falls on a weekend
  * @throws {TypeError} 1 argument required
  *
  * @example
  * // Does 5 October 2014 fall on a weekend?
- * var result = isWeekend(new Date(2014, 9, 5))
+ * var result = isWeekend(Temporal.Date.from('2014-10-05'))
  * //=> true
  */
 export default function isWeekend(dirtyDate) {
   requiredArgs(1, arguments)
 
-  var date = toDate(dirtyDate)
-  var day = date.getDay()
-  return day === 0 || day === 6
+  let date
+  try {
+    date = toTemporalDate(dirtyDate)
+  } catch (e) {
+    if (e instanceof RangeError) return false
+    throw e
+  }
+  const day = date.dayOfWeek
+  return day === 6 || day === 7
 }

@@ -47,4 +47,6 @@ export type Duration = {
   seconds?: number
 }
 
-declare module.exports: (date: Date | number) => boolean
+declare module.exports: (
+  date: Temporal.DateTime | Temporal.Date | Date | number
+) => boolean

@@ -546,7 +546,9 @@ declare module.exports: {
 
   isWednesday: (date: Date | number) => boolean,
 
-  isWeekend: (date: Date | number) => boolean,
+  isWeekend: (
+    date: Temporal.DateTime | Temporal.Date | Date | number
+  ) => boolean,
 
   isWithinInterval: (date: Date | number, interval: Interval) => boolean,
 

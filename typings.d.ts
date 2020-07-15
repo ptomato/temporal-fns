@@ -751,7 +751,9 @@ declare module 'date-fns' {
   function isWednesday(date: Date | number): boolean
   namespace isWednesday {}
 
-  function isWeekend(date: Date | number): boolean
+  function isWeekend(
+    date: Temporal.DateTime | Temporal.Date | Date | number
+  ): boolean
   namespace isWeekend {}
 
   function isWithinInterval(date: Date | number, interval: Interval): boolean
@@ -4586,7 +4588,10 @@ declare module 'date-fns/fp' {
   const isWednesday: CurriedFn1<Date | number, boolean>
   namespace isWednesday {}
 
-  const isWeekend: CurriedFn1<Date | number, boolean>
+  const isWeekend: CurriedFn1<
+    Temporal.DateTime | Temporal.Date | Date | number,
+    boolean
+  >
   namespace isWeekend {}
 
   const isWithinInterval: CurriedFn2<Interval, Date | number, boolean>
@@ -8641,7 +8646,9 @@ declare module 'date-fns/esm' {
   function isWednesday(date: Date | number): boolean
   namespace isWednesday {}
 
-  function isWeekend(date: Date | number): boolean
+  function isWeekend(
+    date: Temporal.DateTime | Temporal.Date | Date | number
+  ): boolean
   namespace isWeekend {}
 
   function isWithinInterval(date: Date | number, interval: Interval): boolean
@@ -12476,7 +12483,10 @@ declare module 'date-fns/esm/fp' {
   const isWednesday: CurriedFn1<Date | number, boolean>
   namespace isWednesday {}
 
-  const isWeekend: CurriedFn1<Date | number, boolean>
+  const isWeekend: CurriedFn1<
+    Temporal.DateTime | Temporal.Date | Date | number,
+    boolean
+  >
   namespace isWeekend {}
 
   const isWithinInterval: CurriedFn2<Interval, Date | number, boolean>
@@ -19083,7 +19093,7 @@ interface dateFns {
 
   isWednesday(date: Date | number): boolean
 
-  isWeekend(date: Date | number): boolean
+  isWeekend(date: Temporal.DateTime | Temporal.Date | Date | number): boolean
 
   isWithinInterval(date: Date | number, interval: Interval): boolean
 
