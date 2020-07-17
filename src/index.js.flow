@@ -53,7 +53,10 @@ declare module.exports: {
     duration: Temporal.Duration | Duration
   ) => Date,
 
-  addBusinessDays: (date: Date | number, amount: number) => Date,
+  addBusinessDays: (
+    date: Temporal.DateTime | Date | number,
+    amount: number
+  ) => Date,
 
   addDays: (date: Date | Temporal.DateTime | number, amount: number) => Date,
 

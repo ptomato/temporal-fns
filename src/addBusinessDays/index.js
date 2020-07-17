@@ -4,6 +4,7 @@ import toInteger from '../_lib/toInteger/index.js'
 import requiredArgs from '../_lib/requiredArgs/index.js'
 import isSunday from '../isSunday/index.js'
 import isSaturday from '../isSaturday/index.js'
+import toTemporalDateTime from '../_lib/toTemporalDateTime/index.js'
 
 /**
  * @name addBusinessDays
@@ -13,37 +14,43 @@ import isSaturday from '../isSaturday/index.js'
  * @description
  * Add the specified number of business days (mon - fri) to the given date, ignoring weekends.
  *
- * @param {Date|Number} date - the date to be changed
+ * @param {Temporal.DateTime|Date|Number} date - the date to be changed
  * @param {Number} amount - the amount of business days to be added. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
  * @returns {Date} the new date with the business days added
  * @throws {TypeError} 2 arguments required
  *
  * @example
  * // Add 10 business days to 1 September 2014:
- * var result = addBusinessDays(new Date(2014, 8, 1), 10)
+ * var result = addBusinessDays(Temporal.DateTime.from('2014-09-01T00:00'), 10)
  * //=> Mon Sep 15 2014 00:00:00 (skipped weekend days)
  */
 export default function addBusinessDays(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments)
 
-  const date = toDate(dirtyDate)
+  let date
+  try {
+    date = toTemporalDateTime(dirtyDate)
+  } catch (e) {
+    if (e instanceof RangeError) return new Date(NaN)
+    throw e
+  }
+
   const startedOnWeekend = isWeekend(date)
   const amount = toInteger(dirtyAmount)
 
   if (isNaN(amount)) return new Date(NaN)
 
-  const hours = date.getHours()
-  const sign = amount < 0 ? -1 : 1
-  const fullWeeks = toInteger(amount / 5)
+  const sign = Math.sign(amount)
+  const fullWeeks = toInteger(Math.abs(amount) / 5)
 
-  date.setDate(date.getDate() + fullWeeks * 7)
+  date = sign >= 0 ? date.plus({ weeks: fullWeeks }) : date.minus({ weeks: fullWeeks })
 
   // Get remaining days not part of a full week
   let restDays = Math.abs(amount % 5)
 
   // Loops over remaining days
   while (restDays > 0) {
-    date.setDate(date.getDate() + sign)
+    date = sign > 0 ? date.plus({ days: 1 }) : date.minus({ days: 1 })
     if (!isWeekend(date)) restDays -= 1
   }
 
@@ -53,12 +60,13 @@ export default function addBusinessDays(dirtyDate, dirtyAmount) {
   if (startedOnWeekend && isWeekend(date) && amount !== 0) {
     // If we're reducing days, we want to add days until we land on a weekday
     // If we're adding days we want to reduce days until we land on a weekday
-    if (isSaturday(date)) date.setDate(date.getDate() + (sign < 0 ? 2 : -1))
-    if (isSunday(date)) date.setDate(date.getDate() + (sign < 0 ? 1 : -2))
+    if (isSaturday(date)) {
+      date = sign < 0 ? date.plus({ days: 2 }) : date.minus({ days: 1 })
+    }
+    if (isSunday(date)) {
+      date = sign < 0 ? date.plus({ days: 1 }) : date.minus({ days: 2 });
+    }
   }
 
-  // Restore hours to avoid DST lag
-  date.setHours(hours)
-
-  return date
+  return toDate(date)
 }

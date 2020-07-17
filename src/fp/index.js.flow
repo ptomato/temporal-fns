@@ -83,7 +83,7 @@ declare module.exports: {
     Temporal.DateTime | Date | number,
     Date
   >,
-  addBusinessDays: CurriedFn2<number, Date | number, Date>,
+  addBusinessDays: CurriedFn2<number, Temporal.DateTime | Date | number, Date>,
   addDays: CurriedFn2<number, Date | Temporal.DateTime | number, Date>,
   addHours: CurriedFn2<number, Date | number, Date>,
   addISOWeekYears: CurriedFn2<number, Date | number, Date>,
